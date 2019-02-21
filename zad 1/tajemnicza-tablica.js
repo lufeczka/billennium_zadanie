@@ -2,8 +2,7 @@ function odkryj() {
     const allTdElements = document.getElementsByTagName("td");
     let billenium_string = [];
     for (let i = 0; i < allTdElements.length; i++){
-        let temp_letter = getComputedStyle(allTdElements[i]);
-        if(temp_letter.color === temp_letter.backgroundColor){
+        if(getComputedStyle(allTdElements[i]).color === getComputedStyle(allTdElements[i]).backgroundColor) {
             billenium_string += allTdElements[i].innerText;
         }
     }
@@ -13,8 +12,7 @@ function odkryj() {
 function show() {
     const allTdElements = document.getElementsByTagName("td");
     for (let i = 0; i < allTdElements.length; i++){
-        let temp_letter = getComputedStyle(allTdElements[i]);
-        if(temp_letter.color === temp_letter.backgroundColor) {
+        if(getComputedStyle(allTdElements[i]).color === getComputedStyle(allTdElements[i]).backgroundColor) {
             allTdElements[i].style.backgroundColor = "black";
             allTdElements[i].style.color = "white";
         } else {
@@ -30,8 +28,7 @@ function rearrange() {
     const allTdElements = document.getElementsByTagName("td");
     let temp = []
     for (let i = allTdElements.length - 1; i >= 0; i--){
-        let temp_letter = getComputedStyle(allTdElements[i]);
-        if(temp_letter.color === temp_letter.backgroundColor) {
+        if(getComputedStyle(allTdElements[i]).color === getComputedStyle(allTdElements[i]).backgroundColor) {
             allTdElements[i].parentNode.removeChild(allTdElements[i]);
         }  else {
             let temp_elem = allTdElements[i].cloneNode();
