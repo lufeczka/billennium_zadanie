@@ -18,7 +18,7 @@
     </ul>
     <table>
         <tbody>
-        <tr>
+        <tr id="wrap">
             <td style="background-color: #e16800; color: #10e131">U</td>
             <td style="background-color: #00dde1; color: #150a1c">N</td>
             <td style="background-color: #567ae1; color: #200e10">I</td>
@@ -77,9 +77,9 @@
     </table>
     <div class="result">
         <div>
-            <button>Odkryj</button>
-            <button>Pokaż tylko ukryte</button>
-            <button>Usuń niewidoczne i ustaw w jednym rzedzie</button>
+            <button id="odkryj" onclick="odkryj()">Odkryj</button>
+            <button id="show" onclick="show()">Pokaż tylko ukryte</button>
+            <button onclick="rearrange()">Usuń niewidoczne i ustaw w jednym rzedzie</button>
         </div>
         <div>Sekretne hasło to: <span id="result" style="color: red"></span><div>
         </div>
