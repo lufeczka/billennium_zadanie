@@ -10,6 +10,7 @@ import { tree_token } from '../assets/mock_tree.js';
 export class AppComponent implements OnInit {
   title = 'zad3';
   openArray = [];
+  itemvalue: string;
 
   constructor (
     @Inject(tree_token) private tree_: any[]
@@ -17,19 +18,19 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.tree_.forEach(element => {
-      this.openArray.push(false);
       element.ifdrop = false;
       element.ifchecked = false;
     });
-    console.log(this.tree_);
   }
 
-  
-  fn() {
-    console.log('elo')
+  fn(item) {
+    if (this.openArray.indexOf(item) !== -1) {
+      this.openArray.splice(this.openArray.indexOf(item), 1);
+    } else {
+      this.openArray.push(item);
+    }
+    document.getElementById('array').innerText = this.openArray.toString();
   }
-
-
 }
 
 
