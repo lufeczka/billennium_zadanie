@@ -24,6 +24,12 @@ export class AppComponent implements OnInit {
     console.log(this.tree_);
   }
 
+  
+  fn() {
+    console.log('elo')
+  }
+
+
 }
 
 

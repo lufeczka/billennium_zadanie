@@ -1,7 +1,7 @@
 <div>
   <div *ngFor="let item of tree_">
       <label (click)="item.ifdrop = !item.ifdrop">X</label>
-      <app-checkbox (change)="item.ifchecked = !item.ifchecked, fn()"></app-checkbox>
+      <app-checkbox (change)="item.ifchecked = !item.ifchecked; fn()"></app-checkbox>
       {{item.value}}
       <div *ngIf="item.ifdrop">
         <div *ngFor="let item2 of item.children">
