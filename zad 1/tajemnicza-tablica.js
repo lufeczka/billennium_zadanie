@@ -36,6 +36,7 @@ function rearrange() {
         }
         append_to_element_desc(selectedTr, nodes_array);
         disable_buttons_by_id(["odkryj", "show"]);
+        change_inner_text("result", "")
     }
 }
 
