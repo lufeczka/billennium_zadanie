@@ -4,15 +4,23 @@
 
     </label>
   </div>
+  <input id="search" type="text" (keyup)="getvalue()">
   <div *ngFor="let item of tree_">
-      <label (click)="item.ifdrop = !item.ifdrop">X</label>
-      <app-checkbox (change)="item.ifchecked = !item.ifchecked; fn(item.value)"></app-checkbox>
-      {{item.value}}
-      <div *ngIf="item.ifdrop">
-        <div *ngFor="let item2 of item.children">
-          <app-checkbox [checked]="item.ifchecked" (change)="fn(item2.value)"></app-checkbox>
-          {{item2.value}}
+    <div *ngIf="checkParent(item.value)">
+        <label (click)="item.ifdrop = !item.ifdrop">X</label>
+        <app-checkbox (change)="item.ifchecked = !item.ifchecked; fn(item.value)"></app-checkbox>
+        {{item.value}}
+        <div *ngIf="item.ifdrop">
+          <div *ngFor="let item2 of item.children">
+            <div *ngIf="checkChildren(item2.value)">
+              <app-checkbox id="child" [checked]="item.ifchecked" (change)="fn(item2.value)"></app-checkbox>
+              {{item2.value}}
+            </div>
+          </div>
         </div>
-      </div>
+    </div>
+     
   </div>
 </div>
+
+
