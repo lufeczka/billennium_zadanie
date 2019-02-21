@@ -35,13 +35,8 @@ function rearrange() {
             allTdElements[i].parentNode.removeChild(allTdElements[i]);
         }
         append_to_element_desc(selectedTr, nodes_array);
-        disable_buttons();
+        disable_buttons_by_id(["odkryj", "show"]);
     }
-}
-
-function disable_buttons() {
-    document.getElementById("odkryj").disabled = true;
-    document.getElementById("show").disabled = true;
 }
 
 function change_inner_text(id, value) {
@@ -58,4 +53,10 @@ function clone_node(element) {
     let temp_elem = element.cloneNode();
     temp_elem.innerText = element.innerText;
     return temp_elem;
+}
+
+function disable_buttons_by_id(ids) {
+    for (let i = 0; i < ids.length; i++) {
+        document.getElementById(ids[i]).disabled = true;
+    }
 }
