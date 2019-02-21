@@ -31,9 +31,7 @@ function rearrange() {
         if (getComputedStyle(allTdElements[i]).color === getComputedStyle(allTdElements[i]).backgroundColor) {
             allTdElements[i].parentNode.removeChild(allTdElements[i]);
         }  else {
-            let temp_elem = allTdElements[i].cloneNode();
-            temp_elem.innerText = allTdElements[i].innerText;
-            nodes_array.push(temp_elem);
+            nodes_array.push(clone_node(allTdElements[i]));
             allTdElements[i].parentNode.removeChild(allTdElements[i]);
         }
         append_to_element_desc(selectedTr, nodes_array);
@@ -54,4 +52,10 @@ function append_to_element_desc(element, array) {
     for (let i = array.length - 1; i >= 0; i--){
         element.parentNode.append(array[i]);
     }
+}
+
+function clone_node(element) {
+    let temp_elem = element.cloneNode();
+    temp_elem.innerText = element.innerText;
+    return temp_elem;
 }
