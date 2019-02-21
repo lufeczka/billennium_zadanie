@@ -4,7 +4,7 @@ function generate_tree() {
     const cap = document.getElementById("cap").value;
     let counter = 0;
     for (let i = 0; i < Math.ceil(levels/cap); i++) {
-        if (i !== Math.ceil(levels/cap) - 1)
+        if (i !== Math.ceil(levels/cap) - 1 || levels - (Math.floor(levels/cap) * cap) === 0)
         {
             for (let j = 0; j < cap; j++) {
                 if (i === 0 && j === 0) {
@@ -20,6 +20,7 @@ function generate_tree() {
             }
             counter--;
         } else {
+            console.log(levels - (Math.floor(levels/cap) * cap));
             for (let j = 0; j < levels - (Math.floor(levels/cap) * cap); j++) {
                 document.getElementById("tree").innerHTML += "/"
                 for (let k = 0; k < counter * 2; k++) {
@@ -34,6 +35,5 @@ function generate_tree() {
 }
 
 function setLevels(levels, cap) {
-    console.log(Math.ceil(levels/cap));
     document.getElementById("show_floors").innerHTML = "Liczba pięter: " + Math.ceil(levels/cap);
 }
