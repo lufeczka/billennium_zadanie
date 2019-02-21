@@ -8,13 +8,9 @@ function generate_tree() {
         {
             for (let j = 0; j < cap; j++) {
                 if (i === 0 && j === 0) {
-                    document.getElementById("tree").innerHTML += "*<br>"
+                    star("tree");
                 } else {
-                    document.getElementById("tree").innerHTML += "/"
-                    for (let k = 0; k < counter * 2; k++) {
-                        document.getElementById("tree").innerHTML += "&nbsp"
-                    }
-                    document.getElementById("tree").innerHTML += " \\<br>"
+                    floor("tree", counter)
                     counter++;
                 }
             }
@@ -36,4 +32,16 @@ function generate_tree() {
 
 function setLevels(levels, cap) {
     document.getElementById("show_floors").innerHTML = "Liczba pięter: " + Math.ceil(levels/cap);
+}
+
+function star(element) {
+    document.getElementById(element).innerHTML += "*<br>"
+}
+
+function floor(element, counter) {
+    document.getElementById(element).innerHTML += "/"
+    for (let k = 0; k < counter * 2; k++) {
+        document.getElementById(element).innerHTML += "&nbsp"
+    }
+    document.getElementById(element).innerHTML += " \\<br>"
 }
