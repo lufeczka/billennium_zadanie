@@ -12,5 +12,9 @@ export class CheckboxComponent implements OnInit {
   ngOnInit() {
   }
 
+  fn() {
+    console.log('elo')
+  }
+
 
 }
