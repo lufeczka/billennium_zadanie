@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { tree_token } from '../assets/mock_tree.js';
 import { CheckboxComponent } from './checkbox/checkbox.component';
+import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-root',
@@ -32,12 +33,15 @@ export class AppComponent implements OnInit {
       this.addParentWithChildren(item, this.openArray);
     }
     document.getElementById('array').innerText = this.openArray.toString();
+    console.log(this.openArray)
   }
 
   deleteChildren(item, array) {
     if (item.children) {
       item.children.forEach(element => {
-        array.splice(array.indexOf(element.value), 1);
+        if (array.indexOf(element.value) !== -1) {
+          array.splice(array.indexOf(element.value), 1);
+        }
       });
     }
   }
