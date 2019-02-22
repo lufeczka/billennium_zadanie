@@ -1,6 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { tree_token } from '../assets/mock_tree.js';
-
+import { Subject } from 'rxjs';
+import { CheckboxComponent } from './checkbox/checkbox.component';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,7 @@ import { tree_token } from '../assets/mock_tree.js';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  @ViewChildren(CheckboxComponent, {read: CheckboxComponent}) checkbox: QueryList<CheckboxComponent>;
   title = 'zad3';
   openArray = [];
   search = '';
@@ -24,35 +26,48 @@ export class AppComponent implements OnInit {
   }
 
   fn(item) {
-    console.log('1')
-    if (this.openArray.indexOf(item) !== -1) {
-      this.openArray.splice(this.openArray.indexOf(item), 1);
+    if (this.openArray.indexOf(item.value) !== -1) {
+      this.openArray.splice(this.openArray.indexOf(item.value), 1);
+      if (item.children) {
+        item.children.forEach(element => {
+          this.openArray.splice(this.openArray.indexOf(element.value), 1);
+        });
+      }
+      document.getElementById('array').innerText = this.openArray.toString();
+
     } else {
-      this.openArray.push(item);
+      this.openArray.push(item.value);
+      if ( item.children ) {
+        item.children.forEach(element => {
+          if (this.openArray.indexOf(element.value) === -1) {
+            this.openArray.push(element.value);
+          }
+        });
+
+        document.getElementById('array').innerText = this.openArray.toString();
+      }
     }
-    document.getElementById('array').innerText = this.openArray.toString();
   }
 
-  getvalue(){
-    this.search = document.getElementById('search').value;
+  getvalue() {
+    this.search = document.getElementById('search')['value'];
   }
 
   checkParent(itemvalue) {
     if (this.search === '') {
       return true;
     }
-    if(this.search.toLocaleLowerCase().startsWith(itemvalue.toString().toLocaleLowerCase())) {
+    if (this.search.toLocaleLowerCase().startsWith(itemvalue.toString().toLocaleLowerCase())) {
       return true;
     }
     return false;
   }
 
   checkChildren(itemvalue) {
-
     if (this.search === '') {
       return true;
     }
-    if(itemvalue.toString().toLocaleLowerCase().includes(this.search.toLocaleLowerCase()) {
+    if (itemvalue.toString().toLocaleLowerCase().includes(this.search.toLocaleLowerCase())) {
       return true;
     }
     return false;
