@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
       this.addParentWithChildren(item, this.openArray);
     }
     document.getElementById('array').innerText = this.openArray.toString();
-    console.log(this.openArray)
   }
 
   deleteChildren(item, array) {
