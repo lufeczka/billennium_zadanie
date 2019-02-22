@@ -57,7 +57,6 @@ export class AppComponent implements OnInit {
       return true;
     }
     item.children.forEach(element => {
-      console.log(element.value.toString().toLocaleLowerCase().includes(this.search.toLocaleLowerCase()));
       if (element.value.toString().toLocaleLowerCase().includes(this.search.toLocaleLowerCase())) {
         flag = true;
       }
