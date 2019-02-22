@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { tree_token } from '../assets/mock_tree.js';
-import { Subject } from 'rxjs';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 
 @Component({
@@ -43,7 +42,6 @@ export class AppComponent implements OnInit {
             this.openArray.push(element.value);
           }
         });
-
         document.getElementById('array').innerText = this.openArray.toString();
       }
     }
@@ -53,11 +51,21 @@ export class AppComponent implements OnInit {
     this.search = document.getElementById('search')['value'];
   }
 
-  checkParent(itemvalue) {
+  checkParent(item) {
+    let flag = false;
     if (this.search === '') {
       return true;
     }
-    if (this.search.toLocaleLowerCase().startsWith(itemvalue.toString().toLocaleLowerCase())) {
+    item.children.forEach(element => {
+      console.log(element.value.toString().toLocaleLowerCase().includes(this.search.toLocaleLowerCase()));
+      if (element.value.toString().toLocaleLowerCase().includes(this.search.toLocaleLowerCase())) {
+        flag = true;
+      }
+    });
+    if (flag) {
+      return true;
+    }
+    if (this.search.toLocaleLowerCase().startsWith(item.value.toString().toLocaleLowerCase())) {
       return true;
     }
     return false;

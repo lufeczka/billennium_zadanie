@@ -6,7 +6,7 @@
   </div>
   <input id="search" type="text" (keyup)="getvalue()">
   <div *ngFor="let item of tree_">
-    <div *ngIf="checkParent(item.value)">
+    <div *ngIf="checkParent(item)">
         <label (click)="item.ifdrop = !item.ifdrop">X</label>
         <app-checkbox [label]="item.value" (change)="item.ifchecked = !item.ifchecked; fn(item)"></app-checkbox>
         {{item.value}}
