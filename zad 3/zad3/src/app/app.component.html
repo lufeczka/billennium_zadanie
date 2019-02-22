@@ -8,12 +8,12 @@
   <div *ngFor="let item of tree_">
     <div *ngIf="checkParent(item)">
         <label (click)="item.ifdrop = !item.ifdrop">X</label>
-        <app-checkbox [label]="item.value" (change)="item.ifchecked = !item.ifchecked; fn(item)"></app-checkbox>
+        <app-checkbox [label]="item.value" (change)="item.ifchecked = !item.ifchecked; printChecked(item)"></app-checkbox>
         {{item.value}}
         <div *ngIf="item.ifdrop">
           <div *ngFor="let item2 of item.children">
             <div *ngIf="checkChildren(item2.value)">
-              <app-checkbox id="child" [label]="item2.value" [checked]="item.ifchecked" (change)="fn(item2)"></app-checkbox>
+              <app-checkbox id="child" [label]="item2.value" [checked]="item.ifchecked" (change)="printChecked(item2)"></app-checkbox>
               {{item2.value}}
             </div>
           </div>

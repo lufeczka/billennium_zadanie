@@ -24,26 +24,32 @@ export class AppComponent implements OnInit {
     });
   }
 
-  fn(item) {
+  printChecked(item) {
     if (this.openArray.indexOf(item.value) !== -1) {
       this.openArray.splice(this.openArray.indexOf(item.value), 1);
-      if (item.children) {
-        item.children.forEach(element => {
-          this.openArray.splice(this.openArray.indexOf(element.value), 1);
-        });
-      }
-      document.getElementById('array').innerText = this.openArray.toString();
-
+      this.deleteChildren(item, this.openArray);
     } else {
-      this.openArray.push(item.value);
-      if ( item.children ) {
-        item.children.forEach(element => {
-          if (this.openArray.indexOf(element.value) === -1) {
-            this.openArray.push(element.value);
-          }
-        });
-        document.getElementById('array').innerText = this.openArray.toString();
-      }
+      this.addParentWithChildren(item, this.openArray);
+    }
+    document.getElementById('array').innerText = this.openArray.toString();
+  }
+
+  deleteChildren(item, array) {
+    if (item.children) {
+      item.children.forEach(element => {
+        array.splice(array.indexOf(element.value), 1);
+      });
+    }
+  }
+
+  addParentWithChildren(item, array) {
+    array.push(item.value);
+    if ( item.children ) {
+      item.children.forEach(element => {
+        if (array.indexOf(element.value) === -1) {
+          array.push(element.value);
+        }
+      });
     }
   }
 
@@ -53,28 +59,21 @@ export class AppComponent implements OnInit {
 
   checkParent(item) {
     let flag = false;
-    if (this.search === '') {
-      return true;
-    }
+
     item.children.forEach(element => {
-      if (element.value.toString().toLocaleLowerCase().includes(this.search.toLocaleLowerCase())) {
+      if (this.checkChildren(element.value)) {
         flag = true;
       }
     });
-    if (flag) {
-      return true;
-    }
-    if (this.search.toLocaleLowerCase().startsWith(item.value.toString().toLocaleLowerCase())) {
+
+    if (this.search.toLocaleLowerCase().startsWith(item.value.toString().toLocaleLowerCase()) || flag || this.search === '' ) {
       return true;
     }
     return false;
   }
 
   checkChildren(itemvalue) {
-    if (this.search === '') {
-      return true;
-    }
-    if (itemvalue.toString().toLocaleLowerCase().includes(this.search.toLocaleLowerCase())) {
+    if (this.search === '' || itemvalue.toString().toLocaleLowerCase().includes(this.search.toLocaleLowerCase())) {
       return true;
     }
     return false;
